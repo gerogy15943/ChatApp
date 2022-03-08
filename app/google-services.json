@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "739784032224",
+    "project_id": "chatapp-9f60f",
+    "storage_bucket": "chatapp-9f60f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739784032224:android:e33992d5bb7fadb54bf585",
+        "android_client_info": {
+          "package_name": "com.example.telegramclone2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739784032224-nan6l0o14jm5m47uq619p06do9t4jm7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuSUHIHTazdlP8CLVe7C4-Ec7-7BoZgoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739784032224-nan6l0o14jm5m47uq619p06do9t4jm7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

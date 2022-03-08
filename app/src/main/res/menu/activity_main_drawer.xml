@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_create_groups"
+            android:icon="@drawable/ic_menu_create_groups"
+            android:title="@string/menu_create_group" />
+        <item
+            android:id="@+id/nav_create_secret_chat"
+            android:icon="@drawable/ic_menu_secret_chat"
+            android:title="@string/menu_create_secret_chat"/>
+        <item
+            android:id="@+id/nav_create_channel"
+            android:icon="@drawable/ic_menu_create_channel"
+            android:title="@string/menu_create_channel"/>
+        <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/ic_menu_contacts"
+            android:title="@string/menu_contacts"/>
+        <item
+            android:id="@+id/nav_calls"
+            android:icon="@drawable/ic_menu_phone"
+            android:title="@string/menu_calls"/>
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_menu_favorites"
+            android:title="@string/menu_favorites"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_favorites"
+            android:title="@string/menu_settings"/>
+    </group>
+    <group
+        android:id="@+id/group2">
+
+        <item
+            android:id="@+id/nav_invite_friends"
+            android:icon="@drawable/ic_menu_invate"
+            android:title="@string/menu_invite_friends"/>
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_menu_help"
+            android:title="@string/menu_help"/>
+
+    </group>
+</menu>

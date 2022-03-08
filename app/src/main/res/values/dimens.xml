@@ -1,0 +1,25 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="normal_text">16sp</dimen>
+    <dimen name="vertical_margin">10dp</dimen>
+    <dimen name="small_text">13sp</dimen>
+
+    <!--Settings-->
+    <dimen name="settings_circleimage_width">55dp</dimen>
+    <dimen name="settings_circleimage_height">55dp</dimen>
+
+    <dimen name="settings_btn_change_photo_width">45dp</dimen>
+    <dimen name="settings_btn_change_photo_height">55dp</dimen>
+
+    <dimen name="settings_circleimage_border">2dp</dimen>
+    <dimen name="vertical_large_margin">16dp</dimen>
+    <dimen name="settings_ripple_effect_radius">4dp</dimen>
+    <dimen name="appPadding">5dp</dimen>
+</resources>

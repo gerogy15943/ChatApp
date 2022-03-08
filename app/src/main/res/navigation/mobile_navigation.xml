@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/chatsFragment"
+        android:name="com.example.telegramclone2.presentation.ui.fragments.chatsFragment.ChatsFragment"
+        android:label="fragment_chats"
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chatsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.telegramclone2.presentation.ui.fragments.settingsFragment.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.telegramclone2.presentation.ui.fragments.loginFragment.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_chatsFragment"
+            app:destination="@id/chatsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/mobile_navigation"
+        app:launchSingleTop="true"
+        app:popUpToInclusive="true"/>
+    <fragment
+        android:id="@+id/changeNameFragment"
+        android:name="com.example.telegramclone.ui.changeName.ChangeNameFragment"
+        android:label="ChangeNameFragment" />
+    <fragment
+        android:id="@+id/changeUserNameFragment"
+        android:name="com.example.telegramclone.ui.changeUserName.ChangeUserNameFragment"
+        android:label="ChangeUserNameFragment" />
+</navigation>
