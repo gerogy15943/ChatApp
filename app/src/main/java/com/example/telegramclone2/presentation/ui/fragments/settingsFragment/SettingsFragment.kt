@@ -1,5 +1,7 @@
 package com.example.telegramclone2.presentation.ui.fragments.settingsFragment
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,6 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.telegramclone2.R
 import com.example.telegramclone2.app.App
 import com.example.telegramclone2.databinding.FragmentSettingsBinding
+import com.squareup.picasso.Picasso
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageActivity
+import com.theartofdev.edmodo.cropper.CropImageView
 import javax.inject.Inject
 
 
@@ -34,6 +40,8 @@ class SettingsFragment : Fragment() {
         (context?.applicationContext as App).appComponent.inject(this)
         viewModel.firebaseUserLiveData.observe(viewLifecycleOwner, Observer {
             binding.apply {
+                if(it?.photourl!!.isNotEmpty())
+                    Picasso.get().load(it?.photourl).into(profileImage)
                 settingsBio.setText(it?.bio)
                 settingsEmail.setText(it?.email)
                 settingsFullname.setText(it?.fullname)
@@ -44,11 +52,33 @@ class SettingsFragment : Fragment() {
         binding.settingsBtnChangeLogin.setOnClickListener {
             findNavController().navigate(R.id.changeUserNameFragment)
         }
+
+        binding.settingsBtnChangeBio.setOnClickListener {
+            findNavController().navigate(R.id.changeBioFragment)
+        }
+
+        binding.settingsChangePhoto.setOnClickListener {changePhotoUser()}
         return binding.root
+    }
+
+    private fun changePhotoUser() {
+        CropImage.activity()
+            .setAspectRatio(1, 1)
+            .setRequestedSize(600,600)
+            .setCropShape(CropImageView.CropShape.OVAL)
+            .start(requireActivity(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.main, menu)}
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            val uri = CropImage.getActivityResult(data).uri
+            viewModel.changePhoto(uri)
+
+        }
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

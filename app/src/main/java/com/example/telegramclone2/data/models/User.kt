@@ -7,4 +7,4 @@ data class User(
     var fullname: String = "",
     var status: String = "",
     var email: String = "",
-    var photoUrl: String = "")
+    var photourl: String = "")

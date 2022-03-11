@@ -43,4 +43,13 @@
         android:id="@+id/changeUserNameFragment"
         android:name="com.example.telegramclone.ui.changeUserName.ChangeUserNameFragment"
         android:label="ChangeUserNameFragment" />
+    <fragment
+        android:id="@+id/changeBioFragment"
+        android:name="com.example.telegramclone.ui.changeUserName.ChangeBioFragment"
+        android:label="ChangeBioFragment" />
+    <fragment
+        android:id="@+id/cropFragment"
+        android:name="com.example.telegramclone2.presentation.ui.fragments.CropFragment.CropFragment"
+        android:label="fragment_crop"
+        tools:layout="@layout/fragment_crop" />
 </navigation>

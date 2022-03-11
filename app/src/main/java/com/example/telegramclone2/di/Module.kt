@@ -7,7 +7,8 @@ import com.example.telegramclone.ui.changeName.ChangeNameViewModel
 import com.example.telegramclone.ui.changeUserName.ChangeUserNameViewModel
 import com.example.telegramclone2.data.repository.FirebaseRepositoryImpl
 import com.example.telegramclone2.domain.repository.FirebaseRepository
-import com.example.telegramclone2.presentation.ui.activity.MainViewModel
+import com.example.telegramclone2.presentation.ui.activity.MainActivity.MainViewModel
+import com.example.telegramclone2.presentation.ui.fragments.changeBioFragment.ChangeBioViewModel
 import com.example.telegramclone2.presentation.ui.fragments.chatsFragment.ChatsFragmentViewModel
 import com.example.telegramclone2.presentation.ui.fragments.loginFragment.LoginFragmentViewModel
 import com.example.telegramclone2.presentation.ui.fragments.settingsFragment.SettingsViewModel
@@ -15,6 +16,7 @@ import com.example.telegramclone2.presentation.viewmodelFactory.ViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -52,6 +54,12 @@ class FirebaseModule{
     fun providePhoneAuthProvider(): PhoneAuthProvider{
         return PhoneAuthProvider.getInstance()
     }
+
+    @Singleton
+    @Provides
+    fun provideFirebaseStorage(): FirebaseStorage{
+        return FirebaseStorage.getInstance()
+    }
 }
 
 @Module
@@ -59,8 +67,10 @@ class DataModule{
 
     @Singleton
     @Provides
-    fun provideFirebaseRepository(firebaseAuth: FirebaseAuth, firebaseDatabase: FirebaseDatabase): FirebaseRepository{
-        return FirebaseRepositoryImpl(firebaseAuth, firebaseDatabase)
+    fun provideFirebaseRepository(firebaseAuth: FirebaseAuth,
+                                  firebaseDatabase: FirebaseDatabase,
+                                  firebaseStorage: FirebaseStorage): FirebaseRepository{
+        return FirebaseRepositoryImpl(firebaseAuth, firebaseDatabase, firebaseStorage)
     }
 }
 
@@ -96,6 +106,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ChangeUserNameViewModel::class)
     abstract fun bindChangeUserNameViewModel(changeUserNameViewModel: ChangeUserNameViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChangeBioViewModel::class)
+    abstract fun bindChangeBioViewModel(changeBioViewModel: ChangeBioViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

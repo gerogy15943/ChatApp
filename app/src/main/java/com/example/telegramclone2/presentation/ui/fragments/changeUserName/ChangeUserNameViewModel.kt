@@ -12,7 +12,7 @@ class ChangeUserNameViewModel @Inject constructor(private val firebaseRepository
 
     val firebaseUserLiveData: LiveData<User?> = firebaseRepository.getFirebaseUserLiveData()
 
-    fun changeUserName(oldUserName: String, newUserName: String): Boolean{
-        return firebaseRepository.changeUserName(oldUserName, newUserName)
+    fun changeUserName(oldUserName: String, newUserName: String){
+        firebaseRepository.changeUserName(oldUserName, newUserName)
     }
 }

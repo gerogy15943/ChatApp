@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.telegramclone2.app.App
 import com.example.telegramclone2.databinding.FragmentEnterPhoneBinding
-import com.example.telegramclone2.presentation.ui.activity.MainActivity
+import com.example.telegramclone2.presentation.ui.activity.MainActivity.MainActivity
 import javax.inject.Inject
 
 class LoginFragment : Fragment() {

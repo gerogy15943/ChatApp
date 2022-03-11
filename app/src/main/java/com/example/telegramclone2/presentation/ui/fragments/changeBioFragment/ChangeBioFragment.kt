@@ -1,7 +1,6 @@
 package com.example.telegramclone.ui.changeUserName
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -9,17 +8,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.telegramclone2.R
 import com.example.telegramclone2.app.App
-import com.example.telegramclone2.databinding.FragmentChangeUserNameBinding
+import com.example.telegramclone2.databinding.FragmentChangeBioBinding
 import com.example.telegramclone2.presentation.ui.activity.MainActivity.MainActivity
+import com.example.telegramclone2.presentation.ui.fragments.changeBioFragment.ChangeBioViewModel
 import javax.inject.Inject
 
 
-class ChangeUserNameFragment : Fragment() {
+class ChangeBioFragment : Fragment() {
 
-    lateinit var binding: FragmentChangeUserNameBinding
+    lateinit var binding: FragmentChangeBioBinding
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: ChangeUserNameViewModel by viewModels { viewModelFactory }
+    private val viewModel: ChangeBioViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +31,8 @@ class ChangeUserNameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentChangeUserNameBinding.inflate(layoutInflater, container, false)
-        binding.settingsInputUsername.setText(viewModel.firebaseUserLiveData.value?.username)
+        binding = FragmentChangeBioBinding.inflate(layoutInflater, container, false)
+        binding.settingsInputBio.setText(viewModel.firebaseUserLiveData.value?.bio)
         return binding.root
     }
 
@@ -43,12 +43,11 @@ class ChangeUserNameFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.settings_confirm_change -> {
-                val oldUserName = viewModel.firebaseUserLiveData.value!!.username
-                val newUserName = binding.settingsInputUsername.text.toString()
-                if (newUserName.isEmpty()) {
-                    binding.settingsInputUsername.error = "Поле пустое"
+                val userBio = binding.settingsInputBio.text.toString()
+                if (userBio.isEmpty()) {
+                    binding.settingsInputBio.error = "Поле пустое"
                 } else {
-                    viewModel.changeUserName(oldUserName, newUserName)
+                    viewModel.changeBio(userBio)
                     findNavController().popBackStack()
                 }
             }
