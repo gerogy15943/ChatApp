@@ -60,7 +60,7 @@
         <item name="android:inputType">phone</item>
     </style>
 
-    <style name="edit_text_material" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <style name="edit_text_material" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/vertical_large_margin</item>

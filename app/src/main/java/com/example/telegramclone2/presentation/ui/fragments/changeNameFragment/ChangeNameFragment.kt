@@ -5,11 +5,13 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.telegramclone2.R
 import com.example.telegramclone2.app.App
 import com.example.telegramclone2.databinding.FragmentChangeNameBinding
 import com.example.telegramclone2.presentation.ui.activity.MainActivity.MainActivity
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 class ChangeNameFragment : Fragment() {
@@ -29,11 +31,14 @@ class ChangeNameFragment : Fragment() {
     ): View? {
         binding = FragmentChangeNameBinding.inflate(layoutInflater)
         (context?.applicationContext as App).appComponent.inject(this)
-        val user = viewModel.firebaseUserLiveData.value?.fullname!!
-        if(!user.isEmpty()) {
-            val fullName = user?.split(" ")
-            binding.settingsInputName.setText(fullName?.get(0))
-            binding.settingsInputSurname.setText(fullName?.get(1))
+        lifecycleScope.launchWhenStarted {
+            viewModel.getUser().collect { user ->
+                if(user.fullname.isNotEmpty()){
+                    val fullName = user.fullname.split(" ")
+                    binding.settingsInputName.setText(fullName?.get(0))
+                    binding.settingsInputSurname.setText(fullName?.get(1))
+                }
+            }
         }
         return binding.root
     }

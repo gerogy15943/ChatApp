@@ -3,20 +3,20 @@ package com.example.telegramclone2.presentation.ui.fragments.settingsFragment
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.telegramclone2.R
 import com.example.telegramclone2.app.App
 import com.example.telegramclone2.databinding.FragmentSettingsBinding
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageActivity
 import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 
@@ -38,7 +38,7 @@ class SettingsFragment : Fragment() {
     ): View? {
         binding = FragmentSettingsBinding.inflate(layoutInflater)
         (context?.applicationContext as App).appComponent.inject(this)
-        viewModel.firebaseUserLiveData.observe(viewLifecycleOwner, Observer {
+        /*viewModel.firebaseUserLiveData.observe(viewLifecycleOwner, Observer {
             binding.apply {
                 if(it?.photourl!!.isNotEmpty())
                     Picasso.get().load(it?.photourl).into(profileImage)
@@ -48,7 +48,22 @@ class SettingsFragment : Fragment() {
                 settingsStatus.setText(it?.status)
                 settingsLogin.setText(it?.username)
             }
-        })
+        })*/
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.getUser().collect {
+                binding.apply {
+                    if(it?.photourl!!.isNotEmpty())
+                        Picasso.get().load(it?.photourl).into(profileImage)
+                    settingsBio.setText(it?.bio)
+                    settingsEmail.setText(it?.email)
+                    settingsFullname.setText(it?.fullname)
+                    settingsStatus.setText(it?.status)
+                    settingsLogin.setText(it?.username)
+                }
+            }
+        }
+
         binding.settingsBtnChangeLogin.setOnClickListener {
             findNavController().navigate(R.id.changeUserNameFragment)
         }
@@ -83,7 +98,7 @@ class SettingsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.settings_menu_exit -> {
-                viewModel.signOut()
+                viewModel.logOut()
             }
             R.id.settings_menu_change_name -> {
                 findNavController().navigate(R.id.changeNameFragment)

@@ -5,12 +5,14 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.telegramclone2.R
 import com.example.telegramclone2.app.App
 import com.example.telegramclone2.databinding.FragmentChangeBioBinding
 import com.example.telegramclone2.presentation.ui.activity.MainActivity.MainActivity
 import com.example.telegramclone2.presentation.ui.fragments.changeBioFragment.ChangeBioViewModel
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 
@@ -32,7 +34,12 @@ class ChangeBioFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChangeBioBinding.inflate(layoutInflater, container, false)
-        binding.settingsInputBio.setText(viewModel.firebaseUserLiveData.value?.bio)
+        lifecycleScope.launchWhenStarted {
+            viewModel.getUser().collect {
+                binding.settingsInputBio.setText(it.bio)
+            }
+        }
+
         return binding.root
     }
 

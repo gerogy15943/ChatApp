@@ -52,4 +52,9 @@
         android:name="com.example.telegramclone2.presentation.ui.fragments.CropFragment.CropFragment"
         android:label="fragment_crop"
         tools:layout="@layout/fragment_crop" />
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.example.telegramclone2.presentation.ui.fragments.contactListFragment.ContactFragment"
+        android:label="fragment_contact"
+        tools:layout="@layout/fragment_contact" />
 </navigation>

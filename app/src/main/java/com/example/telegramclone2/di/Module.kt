@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.telegramclone.ui.changeName.ChangeNameViewModel
 import com.example.telegramclone.ui.changeUserName.ChangeUserNameViewModel
-import com.example.telegramclone2.data.repository.FirebaseRepositoryImpl
-import com.example.telegramclone2.domain.repository.FirebaseRepository
+import com.example.telegramclone2.data.repository.AuthRepositoryImpl
+import com.example.telegramclone2.data.repository.UserRepositoryImpl
+import com.example.telegramclone2.domain.repository.AuthRepositrory
+import com.example.telegramclone2.domain.repository.UserRepository
 import com.example.telegramclone2.presentation.ui.activity.MainActivity.MainViewModel
 import com.example.telegramclone2.presentation.ui.fragments.changeBioFragment.ChangeBioViewModel
 import com.example.telegramclone2.presentation.ui.fragments.chatsFragment.ChatsFragmentViewModel
@@ -67,10 +69,17 @@ class DataModule{
 
     @Singleton
     @Provides
-    fun provideFirebaseRepository(firebaseAuth: FirebaseAuth,
+    fun provideUserRepository(firebaseAuth: FirebaseAuth,
                                   firebaseDatabase: FirebaseDatabase,
-                                  firebaseStorage: FirebaseStorage): FirebaseRepository{
-        return FirebaseRepositoryImpl(firebaseAuth, firebaseDatabase, firebaseStorage)
+                                  firebaseStorage: FirebaseStorage): UserRepository{
+        return UserRepositoryImpl(firebaseAuth, firebaseDatabase, firebaseStorage)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth,
+                              firebaseDatabase: FirebaseDatabase): AuthRepositrory{
+        return AuthRepositoryImpl(firebaseAuth, firebaseDatabase)
     }
 }
 

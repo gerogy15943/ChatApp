@@ -1,15 +1,25 @@
 package com.example.telegramclone2.presentation.ui.fragments.changeBioFragment
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.telegramclone2.data.models.User
-import com.example.telegramclone2.domain.repository.FirebaseRepository
+import com.example.telegramclone2.domain.repository.UserRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ChangeBioViewModel @Inject constructor(private val firebaseRepository: FirebaseRepository): ViewModel() {
-    val firebaseUserLiveData: LiveData<User?> = firebaseRepository.getFirebaseUserLiveData()
+class ChangeBioViewModel @Inject constructor(private val userRepository: UserRepository): ViewModel() {
 
-    fun changeBio(bio: String){
-        firebaseRepository.changeBio(bio)
+    suspend fun getUser(): Flow<User> {
+        return userRepository.getUser()
+    }
+
+    fun changeBio(bio: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.changeBio(bio)
+        }
     }
 }
